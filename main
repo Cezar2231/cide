@@ -1,0 +1,143 @@
+import tkinter as tk
+from tkinter import *
+import sqlite3
+
+
+root = tk.Tk()
+root.title("Store Database")
+conn = sqlite3.connect('Store.db')
+root.geometry("500x350")
+
+
+def openNewWindow():
+    newWindow = Toplevel(root)
+    newWindow.title("Product Category Info")
+    newWindow.geometry("300x300")
+    r_set = conn.execute('''SELECT * from ProductCategory''')
+    i = 0
+    for rows in r_set:
+        for j in range(len(rows)):
+            e = Entry(newWindow, width=10, fg='blue')
+            e.grid(row=i, column=j)
+            e.insert(END, rows[j])
+        i = i + 1
+
+
+frame1 = tk.Frame(root,width=20, height=20)
+frame1.grid(row=2,column=3,pady=5,padx=60)
+table_1_button = Button(frame1,text="ProductCategory Table",bg="#28393a",fg="white",cursor="hand2",command=lambda:openNewWindow(),height=2,width=50)
+table_1_button.pack()
+
+
+def openNewWindow2():
+    newWindow = Toplevel(root)
+    newWindow.title("Product Info")
+    newWindow.geometry("500x300")
+    r_set = conn.execute('''SELECT * from Product''')
+    i = 0
+    for rows in r_set:
+        for j in range(len(rows)):
+            e = Entry(newWindow, width=15, fg='blue')
+            e.grid(row=i, column=j)
+            e.insert(END, rows[j])
+        i = i + 1
+
+
+frame2 = tk.Frame(root,width=50,height=50)
+frame2.grid(row=3,column=3,pady=5,padx=10)
+table_2_button = Button(frame2,text="Product Table",bg="#28393a",fg="white",cursor="hand2",command=lambda:openNewWindow2(),height=2,width=50)
+table_2_button.pack()
+
+def openNewWindow3():
+    newWindow = Toplevel(root)
+    newWindow.title("Customer Info")
+    newWindow.geometry("600x350")
+    r_set = conn.execute('''SELECT * from Customer''')
+    i = 0
+    for rows in r_set:
+        for j in range(len(rows)):
+            e = Entry(newWindow, width=13, fg='blue')
+            e.grid(row=i, column=j)
+            e.insert(END, rows[j])
+        i = i + 1
+
+frame3 = tk.Frame(root,width=50,height=50)
+frame3.grid(row=4,column=3,pady=5,padx=10)
+table_3_button = Button(frame3,text="Customer Table",bg="#28393a",fg="white",cursor="hand2",command=lambda:openNewWindow3(),height=2,width=50)
+table_3_button.pack()
+
+
+
+def openNewWindow4():
+    newWindow = Toplevel(root)
+    newWindow.title("Employee Info")
+
+    newWindow.geometry("600x350")
+    r_set = conn.execute('''SELECT * from Employee''')
+    i = 0
+    for rows in r_set:
+        for j in range(len(rows)):
+            e = Entry(newWindow, width=13, fg='blue')
+            e.grid(row=i, column=j)
+            e.insert(END, rows[j])
+        i = i + 1
+
+frame4 = tk.Frame(root,width=50,height=50)
+frame4.grid(row=5,column=3,pady=5,padx=10)
+table_4_button = Button(frame4,text="Employee Table",bg="#28393a",fg="white",cursor="hand2",command=lambda:openNewWindow4(),height=2,width=50)
+table_4_button.pack()
+
+
+
+def openNewWindow5():
+    newWindow = Toplevel(root)
+    newWindow.title("Sale Info")
+    newWindow.geometry("500x300")
+    r_set = conn.execute('''SELECT * from Sale''')
+    i = 0
+    for rows in r_set:
+        for j in range(len(rows)):
+            e = Entry(newWindow, width=15, fg='blue')
+            e.grid(row=i, column=j)
+            e.insert(END, rows[j])
+        i = i + 1
+
+frame5 = tk.Frame(root,width=50,height=50)
+frame5.grid(row=6,column=3,pady=5,padx=10)
+table_5_button = Button(frame5,text="Sale Table",bg="#28393a",fg="white",cursor="hand2",command=lambda:openNewWindow5(),height=2,width=50)
+table_5_button.pack()
+
+
+def openNewWindow6():
+
+    newWindow = Toplevel(root)
+    newWindow.title("Sale Product Info")
+    newWindow.geometry("500x300")
+    def second():
+        f = tk.Frame(newWindow)
+        f.grid(row=2, column=3, pady=5, padx=10)
+        btn = Button(f, text="SaleProduct Table", bg="#28393a", fg="white", cursor="hand2",
+                                 height=2, width=50)
+        btn.pack()
+    r_set = conn.execute('''SELECT * from SaleProduct''')
+    i = 0
+    for rows in r_set:
+        for j in range(len(rows)):
+            e = Entry(newWindow, width=15, fg='blue')
+            e.grid(row=i, column=j)
+            e.insert(END, rows[j])
+        i = i + 1
+
+
+
+frame6 = tk.Frame(root,width=50,height=50)
+frame6.grid(row=7,column=3,pady=5,padx=10)
+table_6_button = Button(frame6,text="SaleProduct Table",bg="#28393a",fg="white",cursor="hand2",command=lambda:openNewWindow6(),height=2,width=50)
+table_6_button.pack()
+
+
+
+
+
+
+root.mainloop()
